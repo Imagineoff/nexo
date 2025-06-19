@@ -334,13 +334,20 @@ button:hover {
   }, {
     threshold: 0.1
   });
-  revealElements.forEach(el => observer.observe(el));
-
-  // Preloader
+  revealElements.forEach(el => observer.observe(
+    <script>
+  // Po 3 sekundách skryj preloader a zobraz obsah
   setTimeout(() => {
-    document.getElementById('preloader').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
+    if (preloader && mainContent) {
+      preloader.style.display = 'none';
+      mainContent.style.display = 'block';
+    }
   }, 3000);
+</script>
+</body>
+</html>
 
   // Funkce pro Redeem Code
   function checkCode() {
