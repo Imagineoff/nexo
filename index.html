@@ -1,7 +1,433 @@
-function showTime() {
-	document.getElementById('currentTime').innerHTML = new Date().toUTCString();
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ℕ𝔼𝕏𝕆 – bot pro Discord</title>
+
+  <!-- Open Graph metadata -->
+  <meta property="og:title" content="ℕ𝔼𝕏𝕆 – bot pro Discord" />
+  <meta property="og:description" content="Level up your server with ℕ𝔼𝕏𝕆!" />
+  <meta property="og:image" content="https://nexo-bot.neocities.org/Logo.jpeg" />
+  <meta property="og:url" content="https://nexo-bot.neocities.org/" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="https://nexo-bot.neocities.org/Logo.jpeg" />
+<meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+<meta name="msapplication-square70x70logo" content="/mstile-70x70.png" />
+<meta name="msapplication-wide310x150logo" content="/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/mstile-310x310.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: #000;
+      color: #ffb3dd;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #ff66cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+#preloader img {
+  max-width: 400px; /* nebo větší hodnota, např. 400px */
+  width: 100%;
+  height: auto;
 }
-showTime();
-setInterval(function () {
-	showTime();
-}, 1000);
+    #main-content {
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .logo-container {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+
+    .logo {
+      max-width: 350px;
+      width: 80%;
+    }
+header h1 {
+  font-size: 4rem;
+  color: #ff66cc;
+  text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff33aa;
+  animation: neonPulse 3s infinite ease-in-out;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 5px #ff66cc, 0 0 15px #ff33aa, 0 0 25px #ff33aa;
+    color: #ff66cc;
+  }
+  50% {
+    text-shadow: 0 0 15px #ff99dd, 0 0 30px #ff66cc, 0 0 45px #ff33aa;
+    color: #ffffff;
+  }
+}
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      color: #ff66cc;
+      text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff33aa;
+    }
+    
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+.animated-gradient-text {
+  background: linear-gradient(90deg, 
+    #FF6B6B,  /* světle červená */
+    #FFA94D,  /* oranžová */
+    #FFD93D,  /* žlutá */
+    #6BCB77,  /* světle zelená */
+    #4D96FF,  /* světle modrá */
+    #845EC2,  /* fialová */
+    #FF77A9,  /* růžová */
+    #FFB347   /* světle meruňková */
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+    header p {
+      font-size: 1.2rem;
+      color: #ff99cc;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .category {
+      background: rgba(0, 0, 0, 0.6);
+      border-left: 2px solid #ff33aa;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #ff33aa55;
+    }
+
+    .category h2 {
+      color: #ff66cc;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #cc66cc;
+    }
+
+    /* Reveal efekt */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #redeem-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+    margin-left: -11px;
+  border: 2px solid #ffb3dd;
+  border-radius: 8px;
+  background: #000;
+  color: #ffb3dd;
+  transition: border 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+#redeem-input.success {
+  animation: blinkGreen 0.6s 3;
+  border-color: #00ff88;
+  box-shadow: 0 0 8px #00ff88;
+}
+
+#redeem-input.error {
+  animation: blinkRed 0.6s 3;
+  border-color: #ff0033;
+  box-shadow: 0 0 8px #ff0033;
+}
+
+@keyframes blinkRed {
+  0%, 100% { border-color: #ff0033; box-shadow: 0 0 8px #ff0033; }
+  50% { border-color: #000; box-shadow: none; }
+}
+
+@keyframes blinkGreen {
+  0%, 100% { border-color: #00ff88; box-shadow: 0 0 8px #00ff88; }
+  50% { border-color: #000; box-shadow: none; }
+}
+
+#redeem-message {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #ffb3dd;
+}
+button {
+  background-color: #ff33aa;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff33aa, 0 0 20px #ff33aa66;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #ff66cc;
+  box-shadow: 0 0 15px #ff66cc, 0 0 30px #ff66ccaa;
+  transform: scale(1.05);
+}
+  </style>
+</head>
+
+<body>
+  <div id="preloader">
+    <img src="loading.gif" alt="Loading...">
+  </div>
+
+  <div id="main-content">
+    <div class="logo-container">
+      <img src="https://i.imgur.com/wJna0dB.gif" alt="Nexo Logo" class="logo">
+    </div>
+
+    <header>
+      <h1>ℕ𝔼𝕏𝕆</h1>
+      <p>Level up your server with ℕ𝔼𝕏𝕆!</p>
+    </header>
+
+    <main>
+<section class="category reveal">
+  <h2>Discord Bot Status</h2>
+  <p>🟢 Online</p> <!-- nebo 🟡 Idle, 🔴 Offline apod. -->
+</section>
+
+      <section class="category reveal">
+        <h2>Update-log</h2>
+        <p>codes update</p>
+      </section>
+
+      <section class="category reveal">
+<h2>Příkazy</h2>
+<ul>
+  <li>!nexohelp – Zobrazí seznam dostupných příkazů</li>
+  <li>!nexoinfo – Odkaz na web bota</li>
+  <li>!nexogpt &lt;dotaz&gt; – Zeptá se ChatGPT na zadaný dotaz</li>
+  <li>!nexopno – Hodí mincí (panna/orel)</li>
+  <li>!nexocats – Pošle náhodný obrázek kočky</li>
+  <li>!nexomeme – Pošle náhodný meme z internetu</li>
+  <li>!nexoship &lt;@uživatel1&gt; &lt;@uživatel2&gt; – Spočítá "lásku" mezi dvěma uživateli</li>
+  <li>!nexouser [@uživatel] – Zobrazí info o uživateli (nebo o tobě, pokud nikoho neoznačíš)</li>
+  <li>!nexodeathnote &lt;@uživatel&gt; – Zapíše uživatele s náhodným důvodem do Death Note</li>
+  <li>!nexodeathnote &lt;uživatel&gt; | &lt;vlastní důvod&gt; – Vlastní zápis do Death Note</li>
+</ul>
+        </ul>
+      </section>
+
+      <section class="category reveal">
+        <h2>Kde najít bota</h2>
+        <p>Odkaz na server: <a href="https://discord.gg/F7wzTs46s7" target="_blank">にゃ 🌷</a></p>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+          <iframe
+            src="https://discord.com/widget?id=1329202202153058324&theme=dark"
+            width="300"
+            height="400"
+            allowtransparency="true"
+            frameborder="0"
+            style="border: 2px solid #ff00aa; box-shadow: 0 0 15px #ff00aa; border-radius: 10px; background-color: #000000;"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+          </iframe>
+        </div>
+      </section>
+
+      <section class="category reveal">
+        <h2>Přidat bota</h2>
+        <p>Bot je soukromý 🚫</p>
+      </section>
+
+<section class="category reveal">
+  <h2>Bot info</h2>
+  <p>Verze: 4.7</p>
+  <p>Owners / Developers:
+    <a href="https://guns.lol/imagineoff">Imagine</a> |
+    <a href="https://linktr.ee/martina.x.mk">martina.x.mk</a>
+  </p>
+</section>
+<section class="category reveal">
+  <h2>Redeem Codes</h2>
+  <input type="text" id="redeem-input" placeholder="maybe some secret?" />
+  <button onclick="checkCode()">Redeem</button>
+  <p id="redeem-message"></p>
+</section>
+
+  
+
+  <script>
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+  revealElements.forEach(el => observer.observe(el));
+
+  // Preloader
+  setTimeout(() => {
+    document.getElementById('preloader').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  }, 3000);
+
+  // Funkce pro Redeem Code
+  function checkCode() {
+    const input = document.getElementById('redeem-input');
+    const message = document.getElementById('redeem-message');
+    const code = input.value.trim().toLowerCase();
+
+    input.classList.remove('error', 'success');
+    message.textContent = "";
+
+    if (code === "firstcode") {
+      input.classList.add('success');
+      message.textContent = "🎉 použij příkaz !nexoredeem v chatu pro zdarma premium";
+    } else if (code === "meow") {
+      input.classList.add('success');
+      message.textContent = "🐾 Meow secret aktivován!";
+      startMeowEffect();
+    } else {
+      input.classList.add('error');
+      message.textContent = "❌ Neplatný kód!";
+    }
+  }
+
+  // Meow efekt: hudba + blikající pozadí
+  function startMeowEffect() {
+  // Hudba
+  const audio = new Audio("https://files.catbox.moe/2k3ygm.mp3");
+  audio.loop = true;
+  audio.volume = 0.6;
+  audio.play();
+
+  // Barvy pro fade
+  const colors = ["#d63384", "#6f42c1", "#20c997", "#ffc107", "#6610f2", "#fd7e14"];
+  let i = 0;
+
+  // Nastav přechod na body
+  document.body.style.transition = "background-color 2s ease";
+
+  // Interval pro změnu barvy pozadí body
+  const colorInterval = setInterval(() => {
+    document.body.style.backgroundColor = colors[i % colors.length];
+    i++;
+  }, 2000);
+
+  // Vytvoříme kontejner pro zprávu a GIF
+  const container = document.createElement("div");
+  container.style.position = "fixed";
+  container.style.bottom = "20px";
+  container.style.right = "20px";
+  container.style.backgroundColor = "rgba(0,0,0,0.7)";
+  container.style.color = "#fff";
+  container.style.padding = "10px 15px";
+  container.style.borderRadius = "8px";
+  container.style.display = "flex";
+  container.style.alignItems = "center";
+  container.style.gap = "10px";
+  container.style.zIndex = "9999";
+  container.style.fontFamily = "Arial, sans-serif";
+  container.style.fontWeight = "bold";
+
+  // Text zprávy
+  const message = document.createElement("span");
+  message.textContent = "🐾 Meow secret aktivován";
+  message.classList.add('animated-gradient-text');
+
+  // GIF
+  const gif = document.createElement("img");
+  gif.src = "https://i.pinimg.com/originals/23/51/bc/2351bc65b2b5d75cef146b7edddf805b.gif";
+  gif.alt = "Meow aktivován";
+  gif.style.width = "50px";
+  gif.style.height = "50px";
+  gif.style.objectFit = "contain";
+
+  container.appendChild(gif);
+  container.appendChild(message);
+  document.body.appendChild(container);
+}
+ </script>
+ 
+
+
+
+
+
+
+<footer>
+      <p>&copy; 2025 ℕ𝔼𝕏𝕆</p>
+    </footer>
+  </div>
+
