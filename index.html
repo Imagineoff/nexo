@@ -321,6 +321,7 @@ button:hover {
 
   
 
+  
   <script>
   // Scroll reveal
   const revealElements = document.querySelectorAll('.reveal');
@@ -334,9 +335,10 @@ button:hover {
   }, {
     threshold: 0.1
   });
-  revealElements.forEach(el => observer.observe(
-    <script>
-  // Po 3 sekundách skryj preloader a zobraz obsah
+  revealElements.forEach(el => observer.observe(el));
+
+
+  // Preloader: skryje preloader a zobrazí obsah po 3 sekundách
   setTimeout(() => {
     const preloader = document.getElementById('preloader');
     const mainContent = document.getElementById('main-content');
@@ -345,9 +347,7 @@ button:hover {
       mainContent.style.display = 'block';
     }
   }, 3000);
-</script>
-</body>
-</html>
+
 
   // Funkce pro Redeem Code
   function checkCode() {
@@ -373,68 +373,56 @@ button:hover {
 
   // Meow efekt: hudba + blikající pozadí
   function startMeowEffect() {
-  // Hudba
-  const audio = new Audio("https://files.catbox.moe/2k3ygm.mp3");
-  audio.loop = true;
-  audio.volume = 0.6;
-  audio.play();
+    // Hudba
+    const audio = new Audio("https://files.catbox.moe/2k3ygm.mp3");
+    audio.loop = true;
+    audio.volume = 0.6;
+    audio.play();
 
-  // Barvy pro fade
-  const colors = ["#d63384", "#6f42c1", "#20c997", "#ffc107", "#6610f2", "#fd7e14"];
-  let i = 0;
+    // Barvy pro fade
+    const colors = ["#d63384", "#6f42c1", "#20c997", "#ffc107", "#6610f2", "#fd7e14"];
+    let i = 0;
 
-  // Nastav přechod na body
-  document.body.style.transition = "background-color 2s ease";
+    // Nastav přechod na body
+    document.body.style.transition = "background-color 2s ease";
 
-  // Interval pro změnu barvy pozadí body
-  const colorInterval = setInterval(() => {
-    document.body.style.backgroundColor = colors[i % colors.length];
-    i++;
-  }, 2000);
+    // Interval pro změnu barvy pozadí body
+    const colorInterval = setInterval(() => {
+      document.body.style.backgroundColor = colors[i % colors.length];
+      i++;
+    }, 2000);
 
-  // Vytvoříme kontejner pro zprávu a GIF
-  const container = document.createElement("div");
-  container.style.position = "fixed";
-  container.style.bottom = "20px";
-  container.style.right = "20px";
-  container.style.backgroundColor = "rgba(0,0,0,0.7)";
-  container.style.color = "#fff";
-  container.style.padding = "10px 15px";
-  container.style.borderRadius = "8px";
-  container.style.display = "flex";
-  container.style.alignItems = "center";
-  container.style.gap = "10px";
-  container.style.zIndex = "9999";
-  container.style.fontFamily = "Arial, sans-serif";
-  container.style.fontWeight = "bold";
+    // Vytvoříme kontejner pro zprávu a GIF
+    const container = document.createElement("div");
+    container.style.position = "fixed";
+    container.style.bottom = "20px";
+    container.style.right = "20px";
+    container.style.backgroundColor = "rgba(0,0,0,0.7)";
+    container.style.color = "#fff";
+    container.style.padding = "10px 15px";
+    container.style.borderRadius = "8px";
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    container.style.gap = "10px";
+    container.style.zIndex = "9999";
+    container.style.fontFamily = "Arial, sans-serif";
+    container.style.fontWeight = "bold";
 
-  // Text zprávy
-  const message = document.createElement("span");
-  message.textContent = "🐾 Meow secret aktivován";
-  message.classList.add('animated-gradient-text');
+    // Text zprávy
+    const message = document.createElement("span");
+    message.textContent = "🐾 Meow secret aktivován";
+    message.classList.add('animated-gradient-text');
 
-  // GIF
-  const gif = document.createElement("img");
-  gif.src = "https://i.pinimg.com/originals/23/51/bc/2351bc65b2b5d75cef146b7edddf805b.gif";
-  gif.alt = "Meow aktivován";
-  gif.style.width = "50px";
-  gif.style.height = "50px";
-  gif.style.objectFit = "contain";
+    // GIF
+    const gif = document.createElement("img");
+    gif.src = "https://i.pinimg.com/originals/23/51/bc/2351bc65b2b5d75cef146b7edddf805b.gif";
+    gif.alt = "Meow aktivován";
+    gif.style.width = "50px";
+    gif.style.height = "50px";
+    gif.style.objectFit = "contain";
 
-  container.appendChild(gif);
-  container.appendChild(message);
-  document.body.appendChild(container);
-}
- </script>
- 
-
-
-
-
-
-
-<footer>
-      <p>&copy; 2025 ℕ𝔼𝕏𝕆</p>
-    </footer>
-  </div>
-
+    container.appendChild(gif);
+    container.appendChild(message);
+    document.body.appendChild(container);
+  }
+</script>
